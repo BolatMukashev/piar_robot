@@ -1,8 +1,10 @@
 from telethon import TelegramClient
+from functions import *
 from config import API_ID, API_HASH, USER_NAME
 from telethon.tl.functions.channels import JoinChannelRequest, LeaveChannelRequest
 
 client = TelegramClient(USER_NAME, API_ID, API_HASH)
+test_chat_name = "@golangl"
 
 
 async def main():
@@ -50,8 +52,8 @@ async def main():
     #         path = await message.download_media()
     #         print('File saved to', path)  # printed after download is done
 
-    await client(JoinChannelRequest("@golangl"))
-    await client(LeaveChannelRequest("@golangl"))
+    await join_to_chat(client, test_chat_name)
+    await leave_chat(client, test_chat_name)
 
 
 if __name__ == "__main__":
