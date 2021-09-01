@@ -52,10 +52,10 @@ async def main():
     #         path = await message.download_media()
     #         print('File saved to', path)  # printed after download is done
 
-    chats = ChatNames.get_data_by_category("enter and exit")
-    await join_to_many_chats(client, chats)
+    # await join_to_many_chats(client)
+    # await send_messages_to_many_chats(client)
 
-    # await leave_chat(client, test_chat_name)
+    await leave_many_chats(client)
 
 
 if __name__ == "__main__":

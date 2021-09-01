@@ -54,6 +54,16 @@ class JsonFile(object):
         data[category].append(new_data)
         self.create_json_file(data)
 
+    def delete_data(self, category: str, deleted_data: str) -> None:
+        """
+        Перезаписать json файл с новыми данными.
+        :param category: Категория чата
+        :param deleted_data: Данные для удаления
+        """
+        data = self.get_all_data()
+        data[category].remove(deleted_data)
+        self.create_json_file(data)
+
     def check_data(self, category: str, required_data: str) -> Union[bool, None]:
         """
         Проверка наличия искомых данных в json файле.
@@ -64,6 +74,24 @@ class JsonFile(object):
         data = self.get_all_data()
         if required_data in data[category]:
             return True
+
+    def move_between_categories(self, chat_name: str, category_A: str, category_B: str) -> None:
+        """
+        Нас забанили, перемещаемся между категориями
+        :param chat_name: Название чата
+        :param category_A: Название категории, из которой чат будет удален
+        :param category_B: Название категории, в которую чат будет добавлен
+        """
+        self.delete_data(category_A, chat_name)
+        self.insert_new_data(category_B, chat_name)
+
+    def return_chats_in_active_category(self) -> None:
+        """
+        Вернуть чаты из режима ожидания в активную категорию
+        """
+        chats = self.get_data_by_category("waiting")
+        for chat in chats:
+            self.move_between_categories(chat, "waiting", "enter and exit")
 
 
 ChatNames = JsonFile("chats_names.json")
