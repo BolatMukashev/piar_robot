@@ -9,8 +9,8 @@ test_chat_name = "@golangl"
 
 async def main():
     # info
-    me = await client.get_me()
-    all_info = me.stringify()
+    # me = await client.get_me()
+    # all_info = me.stringify()
     # await client.send_message('me', all_info)
 
     # username = me.username
